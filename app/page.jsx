@@ -27,7 +27,7 @@ export default function Home() {
           </h1>
           <Working />
         </div>
-        <div className="mt-10">
+        <div className="mt-48 md:mt-14 lg:mt-20">
           <h1 className="text-4xl md:text-5xl font-bold text-center">
             What Our Users Say
           </h1>

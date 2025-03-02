@@ -31,8 +31,8 @@ export default function RootLayout({children}) {
             enableSystem
             disableTransitionOnChange
           >
-            {/* <header></header> */}
             <Header />
+            {/* <NavbarDemo /> */}
             <main className="min-h-screen">{children}</main>
             <MyFooter />
           </ThemeProvider>

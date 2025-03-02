@@ -1,6 +1,7 @@
 "use client";
 
 import {BackgroundBeams} from "@/components/background-beams";
+import Faq from "@/components/Faq";
 import FeaturesSection from "@/components/FeaturesSection";
 import HeroSection from "@/components/HeroSection";
 import { AnimatedTestimonialsDemo } from "@/components/Testimonials";
@@ -27,11 +28,17 @@ export default function Home() {
           </h1>
           <Working />
         </div>
-        <div className="mt-48 md:mt-14 lg:mt-20">
-          <h1 className="text-4xl md:text-5xl font-bold text-center">
+        <div className="mt-48 md:mt-14 lg:mt-20 bg-muted/50">
+          <h1 className="text-4xl md:text-5xl font-bold text-center pt-10">
             What Our Users Say
           </h1>
           <AnimatedTestimonialsDemo />
+        </div>
+        <div className="mt-24 mb-5">
+          <h1 className="text-4xl md:text-5xl font-bold text-center">
+            Frequently Asked Questions
+          </h1>
+          <Faq />
         </div>
       </div>
     </>

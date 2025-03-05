@@ -1,4 +1,4 @@
-import { AnimatedTestimonials } from "./ui/animated-testimonials";
+import {AnimatedTestimonials} from "./ui/animated-testimonials";
 import img2 from "../public/harshit.jpeg";
 import img4 from "../public/anant.jpg";
 import img3 from "../public/abhinav.jpg";
@@ -30,22 +30,8 @@ export function AnimatedTestimonialsDemo() {
       name: "Anant Jain",
       src: img4,
     },
-    // {
-    //   quote:
-    //     "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-    //   name: "Ishika Jain",
-    //   src: img5,
-    // },
-    // {
-    //   quote:
-    //     "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-    //   name: "Vansh Gupta",
-    //   src: img6,
-    // },
   ];
-  return <AnimatedTestimonials testimonials={testimonials} />;
+
+  // Pass autoplay={true} to enable automatic switching every 5 seconds
+  return <AnimatedTestimonials testimonials={testimonials} autoplay={true} />;
 }
-
-
-
-

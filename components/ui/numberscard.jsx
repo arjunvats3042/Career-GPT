@@ -1,37 +1,53 @@
-"use client"; // Ensures this is a Client Component
+"use client";
 import React, {useState, useEffect, useRef} from "react";
 import styled from "styled-components";
 
 const NumberCard = ({heading, heading2, para}) => {
-  const [count, setCount] = useState(0); // State to track the animated number
-  const ref = useRef(null); // Ref to observe the component
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const hasAnimated = useRef(false); // Track if animation has run
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          let start = 0;
-          const end = parseInt(heading); // Convert heading to number
-          if (isNaN(end)) return; // Exit if not a number
+          // Reset count to 0 when entering viewport
+          setCount(0);
+          hasAnimated.current = false;
 
-          const duration = 2000; // 1 second total duration
-          const increment = Math.max(1, Math.floor(end / 100)); // Adjust increment for smoother steps
-          const stepTime = duration / (end / increment); // Time per step, adjusted for 1 second
+          let start = 0;
+          const end = parseInt(heading);
+          if (isNaN(end)) return;
+
+          const duration = 1000;
+          const increment = Math.max(1, Math.floor(end / 100));
+          const stepTime = duration / (end / increment);
+
+          // Clear any existing interval
+          const existingTimer = ref.current.timer;
+          if (existingTimer) {
+            clearInterval(existingTimer);
+          }
 
           const timer = setInterval(() => {
-            start += increment; // Increase by calculated increment
+            start += increment;
             if (start >= end) {
-              setCount(end); // Ensure it ends exactly at the target
+              setCount(end);
               clearInterval(timer);
+              hasAnimated.current = true;
             } else {
               setCount(start);
             }
           }, stepTime);
 
-          observer.disconnect(); // Stop observing after animation starts
+          // Store timer reference
+          ref.current.timer = timer;
+        } else if (hasAnimated.current) {
+          // Reset count when leaving viewport after animation
+          setCount(0);
         }
       },
-      {threshold: 1} // Trigger when 50% of the component is visible
+      {threshold: 0.5}
     );
 
     if (ref.current) {
@@ -39,14 +55,19 @@ const NumberCard = ({heading, heading2, para}) => {
     }
 
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      if (ref.current) {
+        observer.unobserve(ref.current);
+        if (ref.current.timer) {
+          clearInterval(ref.current.timer);
+        }
+      }
     };
   }, [heading]);
 
   return (
     <StyledWrapper ref={ref}>
       <div className="m2">
-        <div className="flex">
+        <div className="flex items-center">
           <h1>{count}</h1>
           <h1>{heading2}</h1>
         </div>
@@ -56,11 +77,12 @@ const NumberCard = ({heading, heading2, para}) => {
   );
 };
 
+// Keep your existing StyledWrapper unchanged
 const StyledWrapper = styled.div`
   .m2 {
     position: relative;
-    width: 20vmin;
-    height: 20vmin;
+    width: clamp(120px, 20vmin, 200px);
+    height: clamp(120px, 20vmin, 200px);
     background: linear-gradient(135deg, #1e1e24 10%, #050505 60%);
     display: flex;
     flex-direction: column;
@@ -69,25 +91,38 @@ const StyledWrapper = styled.div`
     user-select: none;
     animation: gradient-shift 5s ease-in-out infinite;
     background-size: 200% 200%;
+    border-radius: 8px;
+    padding: 1rem;
 
     h1 {
       margin: 0;
       padding: 0;
-      font-size: 4vmin;
+      font-size: clamp(2rem, 4vmin, 3rem);
       font-weight: 700;
       color: #ffffff;
       text-transform: uppercase;
       letter-spacing: 1px;
       text-align: center;
+
+      &:last-child {
+        margin-left: 0.25rem;
+      }
     }
 
     p {
-      margin: 0.5vmin 0 0;
+      margin: 0.5rem 0 0;
       padding: 0;
-      font-size: 2vmin;
+      font-size: clamp(0.875rem, 2vmin, 1.25rem);
       font-weight: 400;
       color: #e0e0e0;
       text-align: center;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .m2 {
+      width: clamp(100px, 18vmin, 150px);
+      height: clamp(100px, 18vmin, 150px);
     }
   }
 

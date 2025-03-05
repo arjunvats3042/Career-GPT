@@ -24,8 +24,8 @@ const FeaturesSection = () => {
         />
       </div>
 
-      <div className="w-full py-10 md:py-20 bg-muted/50 mt-20 mb-20">
-        <div className="flex flex-wrap justify-center gap-6 md:gap-20">
+      <div className="w-full py-8 sm:py-12 md:py-16 lg:py-20 bg-muted/50 mt-12 sm:mt-16 md:mt-20 mb-12 sm:mb-16 md:mb-20">
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-12 lg:gap-20 px-4 sm:px-6 md:px-8">
           <NumberCard heading="24" heading2="/7" para="AI Support" />
           <NumberCard heading="95" heading2="%" para="Success Rate" />
           <NumberCard heading="1000" heading2="+" para="Interview Question" />

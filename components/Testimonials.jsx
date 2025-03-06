@@ -3,6 +3,7 @@ import img2 from "../public/harshit.jpeg";
 import img4 from "../public/anant.jpg";
 import img3 from "../public/abhinav.jpg";
 import img1 from "../public/vedansh.jpg";
+import img5 from "../public/ishika.jpg";
 
 export function AnimatedTestimonialsDemo() {
   const testimonials = [
@@ -29,6 +30,12 @@ export function AnimatedTestimonialsDemo() {
         "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
       name: "Anant Jain",
       src: img4,
+    },
+    {
+      quote:
+        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
+      name: "Ishika Jain",
+      src: img5,
     },
   ];
 

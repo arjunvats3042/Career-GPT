@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import FeaturesSectionCard from "./FeaturesSectionCard";
 import NumberCard from "./ui/numberscard";

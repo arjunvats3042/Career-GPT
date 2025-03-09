@@ -2,7 +2,7 @@ import { industries } from "@/data/industries";
 import React from "react";
 import OnBoardingForm from "./_components/OnBoardingForm";
 import { getUserOnboardingStatus } from "@/actions/user";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 
 const OnboardingPage = async () => {
 

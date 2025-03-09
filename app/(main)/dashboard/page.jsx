@@ -1,6 +1,13 @@
 import React from "react";
+import {getUserOnboardingStatus} from "@/actions/user";
+import {redirect} from "next/dist/server/api-utils";
 
-const DashboardPage = () => {
+const DashboardPage = async () => {
+  const {isOnboarded} = await getUserOnboardingStatus();
+
+  if (!isOnboarded) {
+    redirect("/onboarding");
+  }
   return <div>DashboardPage</div>;
 };
 

@@ -1,5 +1,4 @@
 "use client";
-
 import {useState, useEffect} from "react";
 import {Inconsolata} from "next/font/google";
 import "./globals.css";
@@ -8,47 +7,36 @@ import MyFooter from "@/components/MyFooter";
 import Header from "@/components/Header";
 import {ClerkProvider} from "@clerk/nextjs";
 import {dark} from "@clerk/themes";
-import { Loading } from "@/components/Loading";
+import Loader from "@/components/Loading";
 
 const inconsolata = Inconsolata({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
 
-
-// Loading Screen Component
-function LoadingScreen() {
-  return (
-    <div className="flex justify-center items-center h-screen bg-black text-white">
-      <Loading/>
-    </div>
-  );
-}
-
 export default function RootLayout({children}) {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 5000); // Simulate loading for 2s
+    // Simulate a minimum loading time for visibility
+    const timer = setTimeout(() => setIsLoading(false), 3000); // 1 second delay
+
+    // Clean up the timer if the component unmounts
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-      }}
-    >
+    <ClerkProvider appearance={{baseTheme: dark}}>
       <html lang="en" suppressHydrationWarning>
-        <body className={`${inconsolata.className}`}>
+        <body className={inconsolata.className}>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
-            {loading ? (
-              <LoadingScreen />
+            {isLoading ? (
+              <Loader />
             ) : (
               <>
                 <Header />

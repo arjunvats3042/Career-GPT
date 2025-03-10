@@ -19,7 +19,7 @@ export default function RootLayout({children}) {
 
   useEffect(() => {
     // Simulate a minimum loading time for visibility
-    const timer = setTimeout(() => setIsLoading(false), 3000); // 1 second delay
+    const timer = setTimeout(() => setIsLoading(false), 4000); // 1 second delay
 
     // Clean up the timer if the component unmounts
     return () => clearTimeout(timer);

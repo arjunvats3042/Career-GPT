@@ -4,12 +4,14 @@ import {BackgroundBeams} from "@/components/background-beams";
 import Faq from "@/components/Faq";
 import FeaturesSection from "@/components/FeaturesSection";
 import HeroSection from "@/components/HeroSection";
+import { ScrollProgress } from "@/components/magicui/scroll-progress";
 import { AnimatedTestimonialsDemo } from "@/components/Testimonials";
 import {Working} from "@/components/Working";
 
 export default function Home() {
   return (
     <>
+      <ScrollProgress  />
       <div>
         <BackgroundBeams />
       </div>

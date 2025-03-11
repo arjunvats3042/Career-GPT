@@ -35,7 +35,7 @@ import {InteractiveGridPattern} from "@/components/magicui/interactive-grid-patt
 import {cn} from "@/lib/utils";
 import {WarpBackground} from "@/components/magicui/warp-background";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
-import { auth } from "@clerk/nextjs/dist/types/server";
+import { auth } from "@clerk/nextjs/server";
 
 const OnboardingForm = async ({industries}) => {
   const {userId} = await auth();

@@ -36,7 +36,8 @@ import {cn} from "@/lib/utils";
 import {WarpBackground} from "@/components/magicui/warp-background";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 
-const OnboardingForm = ({industries}) => {
+const OnboardingForm = async ({industries}) => {
+  const {userId} = await auth();
   const router = useRouter();
   const [selectedIndustry, setSelectedIndustry] = useState(null);
 
@@ -72,7 +73,7 @@ const OnboardingForm = ({industries}) => {
   };
 
   useEffect(() => {
-    if (updateResult?.success && !updateLoading) {
+    if (userId && updateResult?.success && !updateLoading) {
       toast.success("Profile completed successfully!");
       router.push("/dashboard");
       router.refresh();

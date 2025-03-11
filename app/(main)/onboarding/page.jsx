@@ -4,13 +4,13 @@ import OnBoardingForm from "./_components/OnBoardingForm";
 import { getUserOnboardingStatus } from "@/actions/user";
 import { redirect } from "next/navigation";
 
-const OnboardingPage = async () => {
+const OnboardingPage = () => {
 
-  const {isOnboarded} = await getUserOnboardingStatus();
+  // const {isOnboarded} = await getUserOnboardingStatus();
 
-  if(isOnboarded) {
-    redirect("/dashboard");
-  }
+  // if(isOnboarded) {
+  //   redirect("/dashboard");
+  // }
 
   return (
     <div>

@@ -279,7 +279,6 @@ const OnboardingForm = ({industries}) => {
     loading: updateLoading,
     fn: updateUserFn,
     data: updateResult,
-    error: updateError,
   } = useFetch(updateUser);
 
   const {
@@ -298,21 +297,22 @@ const OnboardingForm = ({industries}) => {
         .toLowerCase()
         .replace(/ /g, "-")}`;
 
-      const result = await updateUserFn({
+      await updateUserFn({
         ...values,
         industry: formattedIndustry,
       });
-
-      if (result.success) {
-        toast.success("Profile completed successfully!");
-        router.push("/dashboard");
-        // router.refresh(); // Optional: Remove if not needed
-      }
     } catch (error) {
       console.error("Onboarding error:", error);
-      // Error is already toasted by useFetch, but you can add custom handling here if desired
     }
   };
+
+  useEffect(() => {
+    if (updateResult?.success && !updateLoading) {
+      toast.success("Profile completed successfully!");
+      router.push("/dashboard");
+      router.refresh();
+    }
+  }, [updateResult, updateLoading]);
 
   const watchIndustry = watch("industry");
 

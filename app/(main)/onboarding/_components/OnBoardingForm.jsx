@@ -240,7 +240,6 @@
 
 // export default OnboardingForm;
 
-
 "use client";
 
 import {useState, useEffect} from "react";
@@ -274,6 +273,10 @@ import {updateUser} from "@/actions/user";
 import {toast} from "sonner";
 import {MagicCard} from "@/components/magicui/magic-card";
 import theme from "tailwindcss/defaultTheme";
+import {InteractiveGridPattern} from "@/components/magicui/interactive-grid-pattern";
+import {cn} from "@/lib/utils";
+import {WarpBackground} from "@/components/magicui/warp-background";
+import {InteractiveHoverButton} from "@/components/magicui/interactive-hover-button";
 
 const OnboardingForm = ({industries}) => {
   const router = useRouter();
@@ -283,21 +286,17 @@ const OnboardingForm = ({industries}) => {
     loading: updateLoading,
     fn: updateUserFn,
     data: updateResult,
-    error: updateError,
   } = useFetch(updateUser);
 
   const {
     register,
     handleSubmit,
-    formState: {errors, isValid},
+    formState: {errors},
     setValue,
     watch,
   } = useForm({
     resolver: zodResolver(onboardingSchema),
-    mode: "onChange", // Real-time validation
   });
-
-  const watchIndustry = watch("industry");
 
   const onSubmit = async (values) => {
     try {
@@ -311,7 +310,6 @@ const OnboardingForm = ({industries}) => {
       });
     } catch (error) {
       console.error("Onboarding error:", error);
-      toast.error("Failed to update profile. Please try again.");
     }
   };
 
@@ -321,10 +319,9 @@ const OnboardingForm = ({industries}) => {
       router.push("/dashboard");
       router.refresh();
     }
-    if (updateError) {
-      toast.error("An error occurred while updating your profile");
-    }
-  }, [updateResult, updateLoading, updateError]);
+  }, [updateResult, updateLoading]);
+
+  const watchIndustry = watch("industry");
 
   return (
     <div className="flex items-center justify-center bg-background">
@@ -345,11 +342,11 @@ const OnboardingForm = ({industries}) => {
                 <Label htmlFor="industry">Industry</Label>
                 <Select
                   onValueChange={(value) => {
-                    setValue("industry", value, {shouldValidate: true});
+                    setValue("industry", value);
                     setSelectedIndustry(
                       industries.find((ind) => ind.id === value)
                     );
-                    setValue("subIndustry", "", {shouldValidate: true});
+                    setValue("subIndustry", "");
                   }}
                 >
                   <SelectTrigger id="industry">
@@ -377,9 +374,7 @@ const OnboardingForm = ({industries}) => {
                 <div className="space-y-2">
                   <Label htmlFor="subIndustry">Specialization</Label>
                   <Select
-                    onValueChange={(value) =>
-                      setValue("subIndustry", value, {shouldValidate: true})
-                    }
+                    onValueChange={(value) => setValue("subIndustry", value)}
                   >
                     <SelectTrigger id="subIndustry">
                       <SelectValue placeholder="Select your specialization" />
@@ -411,7 +406,7 @@ const OnboardingForm = ({industries}) => {
                   min="0"
                   max="50"
                   placeholder="Enter years of experience"
-                  {...register("experience", {valueAsNumber: true})}
+                  {...register("experience")}
                 />
                 {errors.experience && (
                   <p className="text-sm text-red-500">
@@ -450,11 +445,7 @@ const OnboardingForm = ({industries}) => {
                 )}
               </div>
 
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={!isValid || updateLoading}
-              >
+              <Button type="submit" className="w-full" disabled={updateLoading}>
                 {updateLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

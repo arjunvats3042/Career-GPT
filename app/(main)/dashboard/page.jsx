@@ -6,11 +6,10 @@ import Dashboardview from "./_components/Dashboard-view";
 
 const DashboardPage = async () => {
   const {isOnboarded} = await getUserOnboardingStatus();
-  const insights = await getIndustryInsights();
-
   if (!isOnboarded) {
     redirect("/onboarding");
   }
+  const insights = await getIndustryInsights();
   return (
     <div className="container ">
       <Dashboardview insights={insights}/>

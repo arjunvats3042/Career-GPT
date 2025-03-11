@@ -13,7 +13,7 @@ export async function updateUser(data) {
     where: {clerkUserId: userId},
   });
 
-  if (!user) throw new Error("User not found");
+  if (!user) throw new Error("fuck u nigga");
 
   try {
     // Start a transaction to handle both operations

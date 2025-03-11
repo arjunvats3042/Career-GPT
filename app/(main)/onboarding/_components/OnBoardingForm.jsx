@@ -239,7 +239,7 @@
 // OnboardingForm.jsx
 "use client";
 
-import {useState} from "react"; // Removed useEffect since it's not used
+import {useEffect, useState} from "react"; // Removed useEffect since it's not used
 import {useRouter} from "next/navigation";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";

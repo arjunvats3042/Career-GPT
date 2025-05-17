@@ -13,7 +13,7 @@ const DashboardPage = async () => {
 
   const insights = await getIndustryInsights();
   return (
-    <div className="container ">
+    <div className="container">
       <Dashboardview insights={insights} />
     </div>
   );

@@ -265,7 +265,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useFetch from "@/hooks/use-fetch";
-import onboardingSchema from "@/app/lib/schema";
+import {onboardingSchema} from "@/app/lib/schema";
 import {updateUser} from "@/actions/user";
 import {toast} from "sonner";
 import {MagicCard} from "@/components/magicui/magic-card";

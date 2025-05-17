@@ -13,7 +13,7 @@ export async function updateUser(data) {
     where: {clerkUserId: userId},
   });
 
-  if (!user) throw new Error("user nhi mila");
+  if (!user) throw new Error("User mila nhi");
 
   try {
     // Start a transaction to handle both operations

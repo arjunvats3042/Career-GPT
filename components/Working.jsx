@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import {Tabs} from "./ui/tabs";
+import {Tabs} from "./ui/tabsacc";
 import banner from "@/public/banner.jpg";
 
 export function Working() {

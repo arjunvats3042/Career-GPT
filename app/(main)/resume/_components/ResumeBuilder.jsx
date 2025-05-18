@@ -430,7 +430,12 @@ import {
 import {toast} from "sonner";
 import MDEditor from "@uiw/react-md-editor";
 import {Button} from "@/components/ui/button";
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
 import {Textarea} from "@/components/ui/textarea";
 import {Input} from "@/components/ui/input";
 import {saveResume} from "@/actions/resume";
@@ -442,7 +447,7 @@ import {resumeSchema} from "@/app/lib/schema";
 import html2pdf from "html2pdf.js/dist/html2pdf.min.js";
 import SaveButton from "@/components/SaveButton";
 import DownloadButton from "@/components/DownloadButton";
-import { entriesToMarkdown } from "@/app/lib/helper";
+import {entriesToMarkdown} from "@/app/lib/helper";
 
 export default function ResumeBuilder({initialContent}) {
   const [activeTab, setActiveTab] = useState("edit");
@@ -571,7 +576,7 @@ export default function ResumeBuilder({initialContent}) {
         <SaveButton />
         <DownloadButton />
       </div>
-      
+
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
           <TabsTrigger value="edit">Form</TabsTrigger>
